@@ -6,7 +6,7 @@ This repository contains scripts to support the Autotech.agil project team's pre
 TODO
 
 ## Code of Conduct
-See our CoC: 
+See our CoC: https://github.com/ZF-Group/ELIV-presentation/blob/main/CODE_OF_CONDUCT.md
 
 ## Project Logo
 TODO
