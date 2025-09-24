@@ -28,14 +28,13 @@ An example workflow for the AUTOSAR Adaptive platform with the Pydantic models a
     - typing-extensions>=4.0
 
 ## Structure of this repository
-- /src/function_model: Contains the function pydantic model. Also, an example function model and JSON for an exemplary ADAS application.
-- /src/integration_model/adaptive_autosar: Contains the integration pydantic model for AUTOSAR Adaptive platform.  Also, an example integration model and JSON for the ADAS application.
-- /src/integration_model/ros2: Contains the integration pydantic model for ROS2. Also, an example integration model and JSON for the ADAS application. 
+- [src/function_model](https://github.com/ZF-Group/ELIV-presentation/tree/main/src/function_model): Contains the function pydantic model. Also, an example function model and JSON for an exemplary ADAS application is included in the folder.
+- [src/integration_model](https://github.com/ZF-Group/ELIV-presentation/tree/main/src/integration_model): Contains the integration pydantic model for both AUTOSAR Adaptive and ROS 2 platform.  Also, an example integration model and JSON for the ADAS application is included in the folder.
 
 # Build and Test
-- Run the script /src/function_model/function_model.py to generate the function JSON schema: `python function_model.py`.
-- Run the script /src/function_model/function_model_core_acc.py to generate the function JSON for the exemplary ADAS application: `python function_model_core_acc.py`.
-- Run the script /src/integration_model/adaptive_autosar/integration_model_adaptive_autosar.py to generate the integration JSON schema: `python integration_model_adaptive_autosar.py`.
-- Run the script /src/integration_model/adaptive_autosar/integration_model_AA_core_acc.py tp generate the integration JSON for the exemplary ADAS application: `python integration_model_AA_core_acc.py`. 
+- Run the script [function_model.py](https://github.com/ZF-Group/ELIV-presentation/tree/main/src/function_model) to generate the function JSON schema: `python function_model.py`.
+- Run the script [function_model_core_acc.py](https://github.com/ZF-Group/ELIV-presentation/tree/main/src/function_model) to generate the function JSON for the exemplary ADAS application: `python function_model_core_acc.py`.
+- Run the script [integration_model_adaptive_autosar.py](https://github.com/ZF-Group/ELIV-presentation/tree/main/src/integration_model) to generate the integration JSON schema: `python integration_model_adaptive_autosar.py`.
+- Run the script [integration_model_AA_core_acc.py](https://github.com/ZF-Group/ELIV-presentation/tree/main/src/integration_model) tp generate the integration JSON for the exemplary ADAS application: `python integration_model_AA_core_acc.py`. 
 # Contribute
 TODO: Explain how other users and developers can contribute to make your code better. See contribution.md.
