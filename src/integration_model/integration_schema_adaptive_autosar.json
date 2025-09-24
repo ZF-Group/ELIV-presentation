@@ -1,0 +1,800 @@
+{
+  "$defs": {
+    "ArrayDatatype": {
+      "properties": {
+        "Name": {
+          "description": "Name of the array",
+          "title": "Name",
+          "type": "string"
+        },
+        "Class": {
+          "default": "array",
+          "title": "Class",
+          "type": "string"
+        },
+        "Type": {
+          "$ref": "#/$defs/NumericalDatatypes"
+        },
+        "Dimension": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "title": "Dimension"
+        },
+        "TypeRef": {
+          "title": "Typeref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Name",
+        "Type",
+        "Dimension",
+        "TypeRef"
+      ],
+      "title": "ArrayDatatype",
+      "type": "object"
+    },
+    "BooleanDatatype": {
+      "properties": {
+        "Datatype": {
+          "default": "boolean",
+          "title": "Datatype",
+          "type": "string"
+        },
+        "Default": {
+          "description": "Default value of the signal",
+          "title": "Default",
+          "type": "boolean"
+        },
+        "InitValue": {
+          "description": "Init value of the signal",
+          "title": "Initvalue",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "Default",
+        "InitValue"
+      ],
+      "title": "BooleanDatatype",
+      "type": "object"
+    },
+    "Component": {
+      "properties": {
+        "Name": {
+          "description": "Name of the component",
+          "title": "Name",
+          "type": "string"
+        },
+        "ExecutableName": {
+          "description": "Name of the executable",
+          "title": "Executablename",
+          "type": "string"
+        },
+        "HeaderFiles": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Headerfiles"
+        },
+        "FunctionGroupModes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Functiongroupmodes",
+          "type": "array"
+        },
+        "FunctionList": {
+          "items": {
+            "$ref": "#/$defs/Function"
+          },
+          "title": "Functionlist",
+          "type": "array"
+        },
+        "ParameterList": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/Parameter"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Parameterlist"
+        },
+        "ServiceInterfaceList": {
+          "items": {
+            "$ref": "#/$defs/ServiceInterface"
+          },
+          "title": "Serviceinterfacelist",
+          "type": "array"
+        }
+      },
+      "required": [
+        "Name",
+        "ExecutableName",
+        "HeaderFiles",
+        "FunctionGroupModes",
+        "FunctionList",
+        "ParameterList",
+        "ServiceInterfaceList"
+      ],
+      "title": "Component",
+      "type": "object"
+    },
+    "EnumList": {
+      "properties": {
+        "Symbol": {
+          "title": "Symbol",
+          "type": "string"
+        },
+        "Value": {
+          "title": "Value",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "Symbol",
+        "Value"
+      ],
+      "title": "EnumList",
+      "type": "object"
+    },
+    "EnumerationDatatype": {
+      "properties": {
+        "Name": {
+          "description": "Name of the enumeration",
+          "title": "Name",
+          "type": "string"
+        },
+        "Class": {
+          "default": "enumeration",
+          "title": "Class",
+          "type": "string"
+        },
+        "EnumField": {
+          "items": {
+            "$ref": "#/$defs/EnumList"
+          },
+          "title": "Enumfield",
+          "type": "array"
+        }
+      },
+      "required": [
+        "Name",
+        "EnumField"
+      ],
+      "title": "EnumerationDatatype",
+      "type": "object"
+    },
+    "Event": {
+      "properties": {
+        "Name": {
+          "description": "Name of the event",
+          "title": "Name",
+          "type": "string"
+        },
+        "DataType": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/NumericalDatatypes"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "description": "datatype of the event",
+          "title": "Datatype"
+        },
+        "DataMappingList": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Name of the variable being mapped",
+          "title": "Datamappinglist"
+        }
+      },
+      "required": [
+        "Name",
+        "DataType",
+        "DataMappingList"
+      ],
+      "title": "Event",
+      "type": "object"
+    },
+    "Fields": {
+      "properties": {
+        "Name": {
+          "description": "Name of the field",
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Name"
+      ],
+      "title": "Fields",
+      "type": "object"
+    },
+    "Function": {
+      "properties": {
+        "Name": {
+          "description": "Name of the function/runnable",
+          "title": "Name",
+          "type": "string"
+        },
+        "Modes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Modes",
+          "type": "array"
+        },
+        "RunType": {
+          "description": "Type of execution of the function",
+          "pattern": "^(Init|Cyclic|Terminate)$",
+          "title": "Runtype",
+          "type": "string"
+        },
+        "CycleTime": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Run time of the function in milliseconds",
+          "nullable": true,
+          "title": "Cycletime"
+        },
+        "Scheduling": {
+          "anyOf": [
+            {
+              "pattern": "^(Preemptive|Non-preemptive|RR|FIFO)$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Type of scheduling",
+          "nullable": true,
+          "title": "Scheduling"
+        }
+      },
+      "required": [
+        "Name",
+        "Modes",
+        "RunType",
+        "CycleTime",
+        "Scheduling"
+      ],
+      "title": "Function",
+      "type": "object"
+    },
+    "FunctionInformation": {
+      "properties": {
+        "FunctionName": {
+          "description": "Name of the function",
+          "title": "Functionname",
+          "type": "string"
+        },
+        "Responsible": {
+          "description": "Responsible function developer",
+          "title": "Responsible",
+          "type": "string"
+        },
+        "Description": {
+          "description": "description of the function",
+          "title": "Description",
+          "type": "string"
+        }
+      },
+      "required": [
+        "FunctionName",
+        "Responsible",
+        "Description"
+      ],
+      "title": "FunctionInformation",
+      "type": "object"
+    },
+    "MetaInformation": {
+      "properties": {
+        "Authority": {
+          "description": "Department Responsible",
+          "title": "Authority",
+          "type": "string"
+        },
+        "Author": {
+          "description": "Author of the file",
+          "title": "Author",
+          "type": "string"
+        },
+        "Date": {
+          "description": "date of the last update",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+          "title": "Date",
+          "type": "string"
+        },
+        "Version": {
+          "description": "version information of the file",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Authority",
+        "Author",
+        "Date",
+        "Version"
+      ],
+      "title": "MetaInformation",
+      "type": "object"
+    },
+    "Method": {
+      "properties": {
+        "Name": {
+          "description": "Name of the method",
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Name"
+      ],
+      "title": "Method",
+      "type": "object"
+    },
+    "Numerical": {
+      "properties": {
+        "Datatype": {
+          "$ref": "#/$defs/NumericalDatatypes"
+        },
+        "MinValue": {
+          "description": "Minumum value of the numerical signal after scaling and offset",
+          "title": "Minvalue",
+          "type": "number"
+        },
+        "MaxValue": {
+          "description": "Maximum value of the numerical signal after scaling and offset",
+          "title": "Maxvalue",
+          "type": "number"
+        },
+        "Offset": {
+          "description": "Offset of the numerical signal after scaling",
+          "title": "Offset",
+          "type": "number"
+        },
+        "Scaling": {
+          "description": "Scaling factor of the numerical signal",
+          "title": "Scaling",
+          "type": "number"
+        },
+        "Unit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Unit of the signal",
+          "title": "Unit"
+        },
+        "Default": {
+          "description": "Default value of the signal",
+          "title": "Default",
+          "type": "number"
+        },
+        "InitValue": {
+          "description": "Init value of the signal",
+          "title": "Initvalue",
+          "type": "number"
+        }
+      },
+      "required": [
+        "Datatype",
+        "MinValue",
+        "MaxValue",
+        "Offset",
+        "Scaling",
+        "Unit",
+        "Default",
+        "InitValue"
+      ],
+      "title": "Numerical",
+      "type": "object"
+    },
+    "NumericalDatatypes": {
+      "enum": [
+        "float",
+        "double",
+        "int32",
+        "int64",
+        "uint32",
+        "uint64",
+        "float32",
+        "bool",
+        "int8_t",
+        "uint8_t",
+        "int16_t",
+        "uint16_t"
+      ],
+      "title": "NumericalDatatypes",
+      "type": "string"
+    },
+    "Parameter": {
+      "properties": {
+        "Name": {
+          "description": "Name of the parameter",
+          "title": "Name",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Description of the parameter",
+          "title": "Description",
+          "type": "string"
+        },
+        "Datatype": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Numerical"
+            },
+            {
+              "$ref": "#/$defs/StringDatatype"
+            },
+            {
+              "$ref": "#/$defs/BooleanDatatype"
+            },
+            {
+              "$ref": "#/$defs/StructDatatype"
+            }
+          ],
+          "description": "datatype of the parameter",
+          "title": "Datatype"
+        },
+        "RangeErrorAction": {
+          "anyOf": [
+            {
+              "pattern": "^(Default|Init)$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "In case of Value Range error of the parameter which value to be considered",
+          "title": "Rangeerroraction"
+        },
+        "InterfaceType": {
+          "description": "Description of the type of parameter (persistent, calibration or measurement)",
+          "pattern": "^(PersistanceMemory|Calibration|Measurement)$",
+          "title": "Interfacetype",
+          "type": "string"
+        },
+        "Attribute": {
+          "description": "Description on the parameter attribute (constant or learning)",
+          "pattern": "^(NA|Normal|LearningParameter)$",
+          "title": "Attribute",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Name",
+        "Description",
+        "Datatype",
+        "RangeErrorAction",
+        "InterfaceType",
+        "Attribute"
+      ],
+      "title": "Parameter",
+      "type": "object"
+    },
+    "Provider": {
+      "properties": {
+        "Name": {
+          "description": "Name of the provider for the service",
+          "title": "Name",
+          "type": "string"
+        },
+        "ServiceDeploymentType": {
+          "description": "Type of the deployment for the service",
+          "title": "Servicedeploymenttype",
+          "type": "string"
+        },
+        "ServiceInstanceID": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Instance ID of the service",
+          "nullable": true,
+          "title": "Serviceinstanceid"
+        },
+        "ContractName": {
+          "description": "Name of the MW framework",
+          "title": "Contractname",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Name",
+        "ServiceDeploymentType",
+        "ServiceInstanceID",
+        "ContractName"
+      ],
+      "title": "Provider",
+      "type": "object"
+    },
+    "ServiceInterface": {
+      "properties": {
+        "Name": {
+          "description": "Name of the service interface",
+          "title": "Name",
+          "type": "string"
+        },
+        "Role": {
+          "description": "Role of the service interface, can be either Consumer or Provider",
+          "pattern": "^(Consumer|Provider)$",
+          "title": "Role",
+          "type": "string"
+        },
+        "ServiceList": {
+          "description": "List of services",
+          "items": {
+            "$ref": "#/$defs/Services"
+          },
+          "title": "Servicelist",
+          "type": "array"
+        },
+        "Provider": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/Provider"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Provider"
+        }
+      },
+      "required": [
+        "Name",
+        "Role",
+        "ServiceList",
+        "Provider"
+      ],
+      "title": "ServiceInterface",
+      "type": "object"
+    },
+    "Services": {
+      "properties": {
+        "Events": {
+          "items": {
+            "$ref": "#/$defs/Event"
+          },
+          "title": "Events",
+          "type": "array"
+        },
+        "Methods": {
+          "items": {
+            "$ref": "#/$defs/Method"
+          },
+          "title": "Methods",
+          "type": "array"
+        },
+        "Fields": {
+          "items": {
+            "$ref": "#/$defs/Fields"
+          },
+          "title": "Fields",
+          "type": "array"
+        }
+      },
+      "required": [
+        "Events",
+        "Methods",
+        "Fields"
+      ],
+      "title": "Services",
+      "type": "object"
+    },
+    "StringDatatype": {
+      "properties": {
+        "DataType": {
+          "default": "string",
+          "title": "Datatype",
+          "type": "string"
+        },
+        "Default": {
+          "description": "Default value of the signal",
+          "title": "Default",
+          "type": "string"
+        },
+        "InitValue": {
+          "description": "Init value of the signal",
+          "title": "Initvalue",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Default",
+        "InitValue"
+      ],
+      "title": "StringDatatype",
+      "type": "object"
+    },
+    "StructDatatype": {
+      "properties": {
+        "Name": {
+          "description": "Name of the structure",
+          "title": "Name",
+          "type": "string"
+        },
+        "Class": {
+          "default": "structure",
+          "title": "Class",
+          "type": "string"
+        },
+        "Field": {
+          "items": {
+            "$ref": "#/$defs/StructFields"
+          },
+          "title": "Field",
+          "type": "array"
+        },
+        "TypeRef": {
+          "title": "Typeref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Name",
+        "Field",
+        "TypeRef"
+      ],
+      "title": "StructDatatype",
+      "type": "object"
+    },
+    "StructFields": {
+      "properties": {
+        "Name": {
+          "description": "Name of the structure's field",
+          "title": "Name",
+          "type": "string"
+        },
+        "Type": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/NumericalDatatypes"
+            },
+            {
+              "$ref": "#/$defs/StructFields"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "title": "Type"
+        }
+      },
+      "required": [
+        "Name",
+        "Type"
+      ],
+      "title": "StructFields",
+      "type": "object"
+    },
+    "TypeReference": {
+      "properties": {
+        "Name": {
+          "description": "Name of the type reference",
+          "title": "Name",
+          "type": "string"
+        },
+        "Class": {
+          "default": "type_reference",
+          "title": "Class",
+          "type": "string"
+        },
+        "cDef": {
+          "$ref": "#/$defs/NumericalDatatypes"
+        }
+      },
+      "required": [
+        "Name",
+        "cDef"
+      ],
+      "title": "TypeReference",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "MetaInformation": {
+      "$ref": "#/$defs/MetaInformation"
+    },
+    "FunctionInformation": {
+      "$ref": "#/$defs/FunctionInformation"
+    },
+    "ComponentList": {
+      "items": {
+        "$ref": "#/$defs/Component"
+      },
+      "title": "Componentlist",
+      "type": "array"
+    },
+    "DataTypes": {
+      "anyOf": [
+        {
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/TypeReference"
+              },
+              {
+                "$ref": "#/$defs/StructDatatype"
+              },
+              {
+                "$ref": "#/$defs/ArrayDatatype"
+              },
+              {
+                "$ref": "#/$defs/EnumerationDatatype"
+              }
+            ]
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "datatype of the interfaces",
+      "title": "Datatypes"
+    }
+  },
+  "required": [
+    "MetaInformation",
+    "FunctionInformation",
+    "ComponentList",
+    "DataTypes"
+  ],
+  "title": "FunctionModel",
+  "type": "object"
+}

@@ -1,0 +1,159 @@
+{
+   "MetaInformation": {
+      "Authority": "ZF Friedrichshafen AG, DIRDP1",
+      "Author": "Parthasarathy Nadarajan",
+      "Date": "2025-08-29",
+      "Version": "1.0.0"
+   },
+   "FunctionInformation": {
+      "FunctionName": "Core Acc Application",
+      "Responsible": "Parthasarathy Nadarajan",
+      "Description": "Core Acc application to integrate with Green Acc to form EcoControl"
+   },
+   "ComponentList": [
+      {
+         "Name": "CoreAcc",
+         "ExecutableName": "CoreAccExecutable",
+         "HeaderFiles": null,
+         "FunctionGroupModes": [
+            "Startup",
+            "Run",
+            "Terminate"
+         ],
+         "FunctionList": [
+            {
+               "Name": "CoreAcc_Init",
+               "Modes": [
+                  "Startup"
+               ],
+               "RunType": "Init",
+               "CycleTime": null,
+               "Scheduling": "Preemptive"
+            },
+            {
+               "Name": "CoreAcc_Step",
+               "Modes": [
+                  "Run"
+               ],
+               "RunType": "Cyclic",
+               "CycleTime": 50.0,
+               "Scheduling": "Non-preemptive"
+            },
+            {
+               "Name": "CoreAcc_Terminate",
+               "Modes": [
+                  "Terminate"
+               ],
+               "RunType": "Terminate",
+               "CycleTime": null,
+               "Scheduling": "Non-preemptive"
+            }
+         ],
+         "ParameterList": null,
+         "ServiceInterfaceList": [
+            {
+               "Name": "MapToCoreAcc",
+               "Role": "Consumer",
+               "ServiceList": [
+                  {
+                     "Events": [
+                        {
+                           "Name": "ADAS_Map_DFS_MDIGeneralMapDataSpdUnitTyp",
+                           "DataType": "uint8_t",
+                           "DataMappingList": null
+                        }
+                     ],
+                     "Methods": [],
+                     "Fields": []
+                  }
+               ],
+               "Provider": [
+                  {
+                     "Name": "SOME/IP",
+                     "ServiceDeploymentType": "SOME/IP",
+                     "ServiceInstanceID": null,
+                     "ContractName": "AdaptiveAUTOSAR"
+                  }
+               ]
+            },
+            {
+               "Name": "ChassisToCoreAcc",
+               "Role": "Consumer",
+               "ServiceList": [
+                  {
+                     "Events": [
+                        {
+                           "Name": "Chassis_Brake_CylP",
+                           "DataType": "double",
+                           "DataMappingList": null
+                        },
+                        {
+                           "Name": "Chassis_Steering_WhlAg",
+                           "DataType": "double",
+                           "DataMappingList": null
+                        },
+                        {
+                           "Name": "Chassis_IMU_LongitudinalAccleration",
+                           "DataType": "double",
+                           "DataMappingList": null
+                        }
+                     ],
+                     "Methods": [],
+                     "Fields": []
+                  }
+               ],
+               "Provider": [
+                  {
+                     "Name": "SOME/IP",
+                     "ServiceDeploymentType": "SOME/IP",
+                     "ServiceInstanceID": null,
+                     "ContractName": "AdaptiveAUTOSAR"
+                  }
+               ]
+            },
+            {
+               "Name": "CoreAccOutput",
+               "Role": "Provider",
+               "ServiceList": [
+                  {
+                     "Events": [
+                        {
+                           "Name": "ADAS_EcoControl_Status",
+                           "DataType": "uint8_t",
+                           "DataMappingList": null
+                        }
+                     ],
+                     "Methods": [],
+                     "Fields": []
+                  }
+               ],
+               "Provider": null
+            },
+            {
+               "Name": "CoreAccToEcoControl",
+               "Role": "Provider",
+               "ServiceList": [
+                  {
+                     "Events": [
+                        {
+                           "Name": "ADAS_EcoControl_IsEnabled",
+                           "DataType": "bool",
+                           "DataMappingList": null
+                        },
+                        {
+                           "Name": "Vehicle_Mass",
+                           "DataType": "double",
+                           "DataMappingList": null
+                        }
+                     ],
+                     "Methods": [],
+                     "Fields": []
+                  }
+               ],
+               "Provider": null
+            }
+         ]
+      }
+   ],
+   "DataTypes": null
+}
