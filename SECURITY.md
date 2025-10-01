@@ -25,5 +25,5 @@ Include as much detail as possible to help us reproduce and fix the issue quickl
 We aim to respond in time and will work with you to resolve the issue promptly.
 
 ## Disclosure Policy
-We follow a responsible disclosure policy. 
+We follow a responsible disclosure policy.
 Please give us time to investigate and fix any vulnerabilities before disclosing them publicly.

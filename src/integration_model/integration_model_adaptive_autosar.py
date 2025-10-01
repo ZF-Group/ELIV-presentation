@@ -1,7 +1,6 @@
 from enum import Enum
 import json
 from typing import List, Optional, Union
-import pydantic
 from typing_extensions import Annotated
 from pydantic import BaseModel, StringConstraints, Field
 
