@@ -1,0 +1,1051 @@
+{
+  "$defs": {
+    "ArgTypeItem": {
+      "properties": {
+        "Name": {
+          "description": "Name of the argument or return value",
+          "title": "Name",
+          "type": "string"
+        },
+        "Datatype": {
+          "description": "Data type of the argument",
+          "pattern": "^DT_[A-Za-z0-9]+$",
+          "title": "Datatype",
+          "type": "string"
+        },
+        "Units": {
+          "description": "Units of the argument",
+          "title": "Units",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Name",
+        "Datatype",
+        "Units"
+      ],
+      "title": "ArgTypeItem",
+      "type": "object"
+    },
+    "Component": {
+      "properties": {
+        "Name": {
+          "description": "Name of the component",
+          "title": "Name",
+          "type": "string"
+        },
+        "functionList": {
+          "description": "List of functions within the component",
+          "items": {
+            "$ref": "#/$defs/function"
+          },
+          "title": "Functionlist",
+          "type": "array"
+        }
+      },
+      "required": [
+        "Name",
+        "functionList"
+      ],
+      "title": "Component",
+      "type": "object"
+    },
+    "DataQ": {
+      "properties": {
+        "Name": {
+          "description": "Name of the Queued Data Interface",
+          "title": "Name",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Description of the Queued Data Interface",
+          "title": "Description",
+          "type": "string"
+        },
+        "Role": {
+          "description": "Role of the Queued Data Interface(Consumer/Provider)",
+          "title": "Role",
+          "type": "string"
+        },
+        "AsilInfo": {
+          "description": "ASIL information",
+          "title": "Asilinfo",
+          "type": "string"
+        },
+        "QueueLength": {
+          "description": "Length of the Queued Data Interface",
+          "title": "Queuelength",
+          "type": "integer"
+        },
+        "Datatype": {
+          "description": "Datatype reference used by the signal",
+          "pattern": "^DT_[A-Za-z0-9]+$",
+          "title": "Datatype",
+          "type": "string"
+        },
+        "Factor": {
+          "description": "Scaling factor for the data",
+          "title": "Factor",
+          "type": "number"
+        },
+        "Offset": {
+          "description": "Offset value for the data",
+          "title": "Offset",
+          "type": "number"
+        },
+        "InitValue": {
+          "description": "Initial value of the data",
+          "title": "Initvalue",
+          "type": "number"
+        },
+        "Units": {
+          "description": "Units of measurement",
+          "title": "Units",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Name",
+        "Description",
+        "Role",
+        "AsilInfo",
+        "QueueLength",
+        "Datatype",
+        "Factor",
+        "Offset",
+        "InitValue",
+        "Units"
+      ],
+      "title": "DataQ",
+      "type": "object"
+    },
+    "Datatype": {
+      "properties": {
+        "typeRef": {
+          "description": "Reference identifier for the datatype, e.g., DT_UInt16",
+          "pattern": "^DT_[A-Za-z0-9]+$",
+          "title": "Typeref",
+          "type": "string"
+        },
+        "category": {
+          "description": "Classification of the datatype, typically primitive or userdefined",
+          "title": "Category",
+          "type": "string"
+        },
+        "cDef": {
+          "description": "C language definition of the datatype",
+          "title": "Cdef",
+          "type": "string"
+        }
+      },
+      "required": [
+        "typeRef",
+        "category",
+        "cDef"
+      ],
+      "title": "Datatype",
+      "type": "object"
+    },
+    "Error": {
+      "properties": {
+        "Name": {
+          "description": "Name of the error or fault",
+          "title": "Name",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Description of the error/fault",
+          "title": "Description",
+          "type": "string"
+        },
+        "Datatype": {
+          "description": "Datatype reference of the Error",
+          "pattern": "^DT_[A-Za-z0-9]+$",
+          "title": "Datatype",
+          "type": "string"
+        },
+        "Dependancy": {
+          "description": "Dependency Error(Base SW/Superset Error) with which this Error is set automatically",
+          "items": {
+            "type": "string"
+          },
+          "title": "Dependancy",
+          "type": "array"
+        },
+        "OccurenceCountLimit": {
+          "description": "Number of times the error has to occur to confirm the Error is active",
+          "title": "Occurencecountlimit",
+          "type": "integer"
+        },
+        "IgnitionCountLimit": {
+          "description": "Number of Ignition cycles count, the error to be reported to the Central Error/Fault Manager for the Error/Fault to be Confirmed. 0 if not valid",
+          "title": "Ignitioncountlimit",
+          "type": "integer"
+        },
+        "MaturationTime": {
+          "description": "The duration in milli seconds for which the Error/Fault is reported to be confirmed. 0 if not valid",
+          "title": "Maturationtime",
+          "type": "integer"
+        },
+        "Severity": {
+          "description": "Description of severity like Safety reaction: Complete funtion disable or degradation, or warning indicator Red/Amber Lamp",
+          "title": "Severity",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Name",
+        "Description",
+        "Datatype",
+        "Dependancy",
+        "OccurenceCountLimit",
+        "IgnitionCountLimit",
+        "MaturationTime",
+        "Severity"
+      ],
+      "title": "Error",
+      "type": "object"
+    },
+    "FunctionDetails": {
+      "properties": {
+        "FunctionName": {
+          "description": "Name of the main function",
+          "title": "Functionname",
+          "type": "string"
+        },
+        "FunctionResponsible": {
+          "description": "Responsible person or team",
+          "title": "Functionresponsible",
+          "type": "string"
+        },
+        "Description": {
+          "description": "General description of the function",
+          "title": "Description",
+          "type": "string"
+        }
+      },
+      "required": [
+        "FunctionName",
+        "FunctionResponsible",
+        "Description"
+      ],
+      "title": "FunctionDetails",
+      "type": "object"
+    },
+    "MetaInfoItem": {
+      "properties": {
+        "Authority": {
+          "default": "ZF Friedrichshafen AG, DIRDS2",
+          "description": "Authoritative organization",
+          "title": "Authority",
+          "type": "string"
+        },
+        "SchemaAuthor": {
+          "default": "Viswanatha Reddy, Batchu",
+          "description": "Author of the schema",
+          "title": "Schemaauthor",
+          "type": "string"
+        },
+        "Date": {
+          "default": "12.09.2025",
+          "description": "Date in DD.MM.YYYY format",
+          "pattern": "^\\d{2}.\\d{2}.\\d{4}$",
+          "title": "Date",
+          "type": "string"
+        },
+        "SchemaVersion": {
+          "default": "1.0.0",
+          "description": "Version of the schema",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "title": "Schemaversion",
+          "type": "string"
+        },
+        "SchemaDescription": {
+          "default": "Details of the standard function Interfaces - Working Revision",
+          "description": "Description of the schema",
+          "title": "Schemadescription",
+          "type": "string"
+        }
+      },
+      "title": "MetaInfoItem",
+      "type": "object"
+    },
+    "Method": {
+      "properties": {
+        "Name": {
+          "description": "Name of the method or service",
+          "title": "Name",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Description of the method/service",
+          "title": "Description",
+          "type": "string"
+        },
+        "Role": {
+          "description": "Role of the method (Consumer/Provider)",
+          "title": "Role",
+          "type": "string"
+        },
+        "InDataTypeList": {
+          "description": "List of input arguments",
+          "items": {
+            "$ref": "#/$defs/ArgTypeItem"
+          },
+          "title": "Indatatypelist",
+          "type": "array"
+        },
+        "OutDataTypeList": {
+          "description": "List of output return values",
+          "items": {
+            "$ref": "#/$defs/ArgTypeItem"
+          },
+          "title": "Outdatatypelist",
+          "type": "array"
+        }
+      },
+      "required": [
+        "Name",
+        "Description",
+        "Role",
+        "InDataTypeList",
+        "OutDataTypeList"
+      ],
+      "title": "Method",
+      "type": "object"
+    },
+    "Mode": {
+      "properties": {
+        "Name": {
+          "description": "Name of the mode",
+          "title": "Name",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Description of the mode",
+          "title": "Description",
+          "type": "string"
+        },
+        "RunnablesList": {
+          "description": "List of runnables/Executables names to be executed in this mode ",
+          "items": {
+            "type": "string"
+          },
+          "title": "Runnableslist",
+          "type": "array"
+        }
+      },
+      "required": [
+        "Name",
+        "Description",
+        "RunnablesList"
+      ],
+      "title": "Mode",
+      "type": "object"
+    },
+    "Parameter": {
+      "properties": {
+        "Name": {
+          "description": "Name of the parameter port",
+          "title": "Name",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Description of the parameter",
+          "title": "Description",
+          "type": "string"
+        },
+        "Datatype": {
+          "description": "Datatype reference of the parameter",
+          "pattern": "^DT_[A-Za-z0-9]+$",
+          "title": "Datatype",
+          "type": "string"
+        },
+        "Asillevel": {
+          "description": "ASIL information ",
+          "title": "Asillevel",
+          "type": "string"
+        },
+        "Min": {
+          "description": "Minimum allowed value",
+          "title": "Min",
+          "type": "number"
+        },
+        "Max": {
+          "description": "Maximum allowed value",
+          "title": "Max",
+          "type": "number"
+        },
+        "Default": {
+          "description": "Default value",
+          "title": "Default",
+          "type": "number"
+        },
+        "InitValue": {
+          "description": "Initial value",
+          "title": "Initvalue",
+          "type": "number"
+        },
+        "RangeErrorAction": {
+          "description": "Action on range error (Default/InitValue)",
+          "title": "Rangeerroraction",
+          "type": "string"
+        },
+        "Interfacetype": {
+          "description": "Type of interface (e.g., PersistenceMemory)",
+          "title": "Interfacetype",
+          "type": "string"
+        },
+        "Attribute": {
+          "description": "Attribute type (e.g., Normal, Learning)",
+          "title": "Attribute",
+          "type": "string"
+        },
+        "Units": {
+          "description": "Units of measurement",
+          "title": "Units",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Name",
+        "Description",
+        "Datatype",
+        "Asillevel",
+        "Min",
+        "Max",
+        "Default",
+        "InitValue",
+        "RangeErrorAction",
+        "Interfacetype",
+        "Attribute",
+        "Units"
+      ],
+      "title": "Parameter",
+      "type": "object"
+    },
+    "SafetyReaction": {
+      "properties": {
+        "Name": {
+          "description": "Name of the safety reaction signal",
+          "title": "Name",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Description of the safety reaction",
+          "title": "Description",
+          "type": "string"
+        },
+        "Datatype": {
+          "description": "datatype of the safety reaction signal",
+          "pattern": "^DT_[A-Za-z0-9]+$",
+          "title": "Datatype",
+          "type": "string"
+        },
+        "ErrorList": {
+          "description": "List of Errors (any Error)  which enables the safety reaction",
+          "items": {
+            "type": "string"
+          },
+          "title": "Errorlist",
+          "type": "array"
+        }
+      },
+      "required": [
+        "Name",
+        "Description",
+        "Datatype",
+        "ErrorList"
+      ],
+      "title": "SafetyReaction",
+      "type": "object"
+    },
+    "Signal": {
+      "properties": {
+        "Name": {
+          "description": "Name of the signal",
+          "title": "Name",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Description of the signal's purpose",
+          "title": "Description",
+          "type": "string"
+        },
+        "Role": {
+          "description": "Role of the signal, e.g., Consumer or Provider",
+          "title": "Role",
+          "type": "string"
+        },
+        "AsilLevel": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Automotive Safety Integrity Level information of the signal",
+          "title": "Asillevel"
+        },
+        "Timeout": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Timeout value of signal if applicable",
+          "title": "Timeout"
+        },
+        "Access": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Immediate or buffered access ",
+          "title": "Access"
+        },
+        "Datatype": {
+          "description": "Datatype reference used by the signal",
+          "pattern": "^DT_[A-Za-z0-9]+$",
+          "title": "Datatype",
+          "type": "string"
+        },
+        "Factor": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Scaling factor",
+          "title": "Factor"
+        },
+        "Offset": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Offset value",
+          "title": "Offset"
+        },
+        "Min": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Minimum valid value",
+          "title": "Min"
+        },
+        "Max": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Maximum valid value",
+          "title": "Max"
+        },
+        "Default": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Default value",
+          "title": "Default"
+        },
+        "InitValue": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Initial value",
+          "title": "Initvalue"
+        },
+        "Units": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Measurement units",
+          "title": "Units"
+        },
+        "RangeErrorAction": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Action to take on value range error",
+          "title": "Rangeerroraction"
+        }
+      },
+      "required": [
+        "Name",
+        "Description",
+        "Role",
+        "Datatype"
+      ],
+      "title": "Signal",
+      "type": "object"
+    },
+    "WatchdogConfig": {
+      "properties": {
+        "Min": {
+          "description": "Number of minimum cycles or minimum time",
+          "title": "Min",
+          "type": "number"
+        },
+        "Max": {
+          "description": "Number of maximum cycles or maximum time",
+          "title": "Max",
+          "type": "number"
+        },
+        "Ref": {
+          "description": "reference value for e.g. How much time/cycles to be observed",
+          "title": "Ref",
+          "type": "number"
+        },
+        "ErrorName": {
+          "description": "ErrorName with description",
+          "title": "Errorname",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Min",
+        "Max",
+        "Ref",
+        "ErrorName"
+      ],
+      "title": "WatchdogConfig",
+      "type": "object"
+    },
+    "WatchdogItem": {
+      "properties": {
+        "AliveSupervision": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/WatchdogConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "DeadlineSupervision": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/WatchdogConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "LogicalSupervision": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Logicalsupervision"
+        }
+      },
+      "required": [
+        "AliveSupervision",
+        "DeadlineSupervision",
+        "LogicalSupervision"
+      ],
+      "title": "WatchdogItem",
+      "type": "object"
+    },
+    "funcContract": {
+      "properties": {
+        "Type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Type of contract, e.g., Global or C function calls",
+          "title": "Type"
+        },
+        "SignalList": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/Signal"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "List of signal interfaces",
+          "title": "Signallist"
+        },
+        "DataQList": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/DataQ"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "List of Queued Data interfaces",
+          "title": "Dataqlist"
+        },
+        "MethodList": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/Method"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "List of Methods",
+          "title": "Methodlist"
+        },
+        "ParameterList": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/Parameter"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "List of Parameters",
+          "title": "Parameterlist"
+        },
+        "ErrorList": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/Error"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "List of Errors",
+          "title": "Errorlist"
+        },
+        "SafetyReactionList": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/SafetyReaction"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "List of SafetyReactions",
+          "title": "Safetyreactionlist"
+        }
+      },
+      "required": [
+        "SignalList",
+        "DataQList",
+        "MethodList",
+        "ParameterList",
+        "ErrorList",
+        "SafetyReactionList"
+      ],
+      "title": "funcContract",
+      "type": "object"
+    },
+    "function": {
+      "properties": {
+        "Name": {
+          "description": "Name of the function",
+          "title": "Name",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Description of the function",
+          "title": "Description",
+          "type": "string"
+        },
+        "Runtype": {
+          "description": "Runtime type, e.g., Init, Cyclic,event based or Shutdown",
+          "title": "Runtype",
+          "type": "string"
+        },
+        "Cycletime": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Cycle time in milliseconds",
+          "title": "Cycletime"
+        },
+        "StackSize": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Stack size allocation",
+          "title": "Stacksize"
+        },
+        "PrevRunnable": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Previous runnable of the component",
+          "title": "Prevrunnable"
+        },
+        "ExecOffset": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Execution offset",
+          "title": "Execoffset"
+        },
+        "ParallelProcessing": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Indicates if parallel processing is enabled",
+          "title": "Parallelprocessing"
+        },
+        "AsilLevel": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "ASIL level of the function",
+          "title": "Asillevel"
+        },
+        "Watchdog": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/WatchdogItem"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Watchdog Configuration for the runnable/Executable. Min, Max and Ref for AliveSupervision in Cycles count, Deadline Supervision in ms time"
+        },
+        "Scheduling": {
+          "description": "Scheduling type, e.g., Pre-emptive or Non-Preemptive",
+          "title": "Scheduling",
+          "type": "string"
+        },
+        "DebounceDelay": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Delay after which the function should run",
+          "title": "Debouncedelay"
+        },
+        "Priority": {
+          "description": "Priority description",
+          "title": "Priority",
+          "type": "string"
+        },
+        "EventList": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Associated events list with which the function is trigegred, only for future scope",
+          "title": "Eventlist"
+        },
+        "funcContractList": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/funcContract"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "List of function contracts",
+          "title": "Funccontractlist"
+        }
+      },
+      "required": [
+        "Name",
+        "Description",
+        "Runtype",
+        "Watchdog",
+        "Scheduling",
+        "Priority"
+      ],
+      "title": "function",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "MetaInfo": {
+      "$ref": "#/$defs/MetaInfoItem",
+      "description": "Metadata information"
+    },
+    "FunctionInfo": {
+      "$ref": "#/$defs/FunctionDetails",
+      "description": "Software Function Name and description"
+    },
+    "ComponentList": {
+      "description": "List of components in a function",
+      "items": {
+        "$ref": "#/$defs/Component"
+      },
+      "title": "Componentlist",
+      "type": "array"
+    },
+    "ModesList": {
+      "anyOf": [
+        {
+          "items": {
+            "$ref": "#/$defs/Mode"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Different Modes of the Function and their active runnables/Executables",
+      "title": "Modeslist"
+    },
+    "Datatypes": {
+      "description": "List of Primitive and Userdefined datatypes",
+      "items": {
+        "$ref": "#/$defs/Datatype"
+      },
+      "title": "Datatypes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "MetaInfo",
+    "FunctionInfo",
+    "ComponentList",
+    "ModesList",
+    "Datatypes"
+  ],
+  "title": "FDKFunctionModel",
+  "type": "object"
+}
