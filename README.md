@@ -1,40 +1,147 @@
-# ELIV-2025 - Efficient Integration of Cross Platform Functions onto Service-Oriented Architectures
-## Abstract 
-The automotive industry is currently undergoing a major transformation with respect to the Electric/Electronic (E/E) and software architecture, driven by a significant increase in the complexity of the technological stack within a vehicle. This complexity acts as a driving force for Software-Defined Vehicles (SDVs) leading to the evolution of the automotive E/E architectures from decentralized configuration comprising multiple Electronic Control Units (ECUs) towards a more integrated configuration comprising a smaller number of ECUs, domain controllers, gateways, and High-Performance Computers (HPCs). This transition along with several other reasons have resulted in heterogeneous software platforms such as AUTOSAR Classic, AUTOSAR Adaptive, and prototypical frameworks like ROS 2™. It is therefore essential to develop applications that are both hardware- and platform/middleware-agnostic to attain development and integration efficiency. This work presents an application development and integration concept to facilitate developing applications as Software as a Product (SaaP), while simultaneously ensuring efficient integration onto multiple software architecture platforms. The concept involves designing applications in a hardware- and software platform-agnostic manner and standardizing application interfaces. It also includes describing the relevant aspects of the application and corresponding middleware in a machine-readable format to aid the integration of developed applications. Additionally, tools are developed to facilitate semi-automation of the development and integration processes. An example application has been developed and integrated onto AUTOSAR Adaptive and ROS 2, demonstrating the applicability of the approach. Finally, metrics are presented to show the efficiency of the overall concept.
+# ELIV-2025 – Efficient Integration of Cross-Platform Functions onto Service-Oriented Architectures
 
-## Mission 
-The aim of the project is to design the applications in such a way that they are agnostic to the underlying hardware and software platforms. The relevant aspects of the application and the underlying software platforms are described in a machine-readable format, i.e., JavaScript Object Notation (JSON) that is in turn consumed by tools to enable efficient integration of applications. The project also aims to standardize the data interface of the application based on Vehicle Signal Specification (VSS). 
+![Python](https://img.shields.io/badge/language-Python-blue)
+
+## Abstract
+
+The automotive industry is rapidly evolving its Electric/Electronic (E/E) and software architectures in response to growing vehicle complexity. This transformation has led to the coexistence of multiple platforms, including:
+
+- **AUTOSAR Classic**
+- **AUTOSAR Adaptive**
+- **ROS 2™** (Robot Operating System)
+
+To address integration and development challenges across these heterogeneous environments, this project presents a concept for building applications as **Software as a Product (SaaP)**. The approach focuses on:
+
+- Designing applications in a platform-agnostic manner
+- Standardizing application interfaces
+- Describing application and middleware aspects in **machine-readable formats** (JSON)
+- Providing tools for **semi-automated development and integration**
+
+A demonstration application has been successfully integrated onto AUTOSAR Adaptive and ROS 2, validating the approach and providing efficiency metrics.
+
+---
+
+## Mission
+
+Our objectives are to:
+
+- Develop applications agnostic to hardware and software platforms
+- Use **JSON** to describe application and platform aspects
+- Enable tool-based integration leveraging these descriptions
+- Standardize data interfaces using **Vehicle Signal Specification (VSS)**
+
+---
 
 ## Code of Conduct
-See our CoC: https://github.com/ZF-Group/ELIV-presentation/blob/main/CODE_OF_CONDUCT.md
 
-## Supported features
-Pydantic models are created to generate JSON schemas for:
-- Function model: Describing the application related information agnostic to the underlying hardware and software platform.
-- Integration model: Describing the application related information along with the additional information necessary when the application should be integrated to a specific software platform, e.g., AUTOSAR Adaptive. 
+Please review our [Code of Conduct](https://github.com/ZF-Group/ELIV-presentation/blob/main/CODE_OF_CONDUCT.md).
 
-## Project language
-- Language: Python
+---
+
+## Features
+
+- **Function Model:** Pydantic models generate JSON schemas to describe application information independently of the underlying platform.
+- **Integration Model:** Pydantic models describe integration details required for specific platforms (e.g., AUTOSAR Adaptive, ROS 2).
+
+---
+
+## Project Language
+
+- **Language:** Python (tested with v3.10+)
+
+---
 
 ## Workflow
-An example workflow for the AUTOSAR Adaptive platform with the Pydantic models and corresponding JSONs is shown in the Figure below. For detailed information, refer to the complete publication: TODO: Add the link to the publication. 
 
-<p align="center"><img width="741" height="343" alt="image" src="https://github.com/user-attachments/assets/f102dbfe-aacb-4f94-b1d3-734c8e7c4f5d" />
+Below is a sample workflow for the AUTOSAR Adaptive platform using Pydantic models and JSON:
 
-# Getting Started
-## Dependencies 
-- The function and integration model is based on Python (tested in v3.10) and the following libraries:
-    - pydantic>=2.0
-    - typing-extensions>=4.0
+<p align="center">
+  <img width="741" height="343" alt="Workflow Diagram" src="https://github.com/user-attachments/assets/f102dbfe-aacb-4f94-b1d3-734c8e7c4f5d" />
+</p>
 
-## Structure of this repository
-- [src/function_model](https://github.com/ZF-Group/ELIV-presentation/tree/main/src/function_model): Contains the function pydantic model. Also, an example function model and JSON for an exemplary ADAS application is included in the folder.
-- [src/integration_model](https://github.com/ZF-Group/ELIV-presentation/tree/main/src/integration_model): Contains the integration pydantic model for both AUTOSAR Adaptive and ROS 2 platform.  Also, an example integration model and JSON for the ADAS application is included in the folder.
+> **Note:** Function and integration models are currently generated manually. Future releases aim to automate JSON generation based on function and platform data.
 
-# Build and Test
-- Run the script [function_model.py](https://github.com/ZF-Group/ELIV-presentation/tree/main/src/function_model) to generate the function JSON schema: `python function_model.py`.
-- Run the script [function_model_core_acc.py](https://github.com/ZF-Group/ELIV-presentation/tree/main/src/function_model) to generate the function JSON for the exemplary ADAS application: `python function_model_core_acc.py`.
-- Run the script [integration_model_adaptive_autosar.py](https://github.com/ZF-Group/ELIV-presentation/tree/main/src/integration_model) to generate the integration JSON schema: `python integration_model_adaptive_autosar.py`.
-- Run the script [integration_model_AA_core_acc.py](https://github.com/ZF-Group/ELIV-presentation/tree/main/src/integration_model) tp generate the integration JSON for the exemplary ADAS application: `python integration_model_AA_core_acc.py`. 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. See contribution.md.
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Python 3.10 or higher
+
+### Installation
+
+```bash
+pip install pydantic>=2.0 typing-extensions>=4.0
+```
+
+### Repository Structure
+
+- [`src/function_model`](https://github.com/ZF-Group/ELIV-presentation/tree/main/src/function_model): Function Pydantic model, example function model, and JSON for an exemplary ADAS application.
+- [`src/integration_model`](https://github.com/ZF-Group/ELIV-presentation/tree/main/src/integration_model): Integration Pydantic models for AUTOSAR Adaptive and ROS 2 platforms, with example integration models and JSON.
+- [`src/example_adas_application.vspec`](https://github.com/ZF-Group/ELIV-presentation/tree/main/src/example_adas_application.vspec): Vehicle Signal Specification (VSS) for the exemplary ADAS application.
+
+---
+
+## Build and Test
+
+### Function Model
+
+- Generate function model schema:
+  ```bash
+  python function_model.py  # Outputs: function_json_schema.json
+  ```
+- Generate function model for core ACC:
+  ```bash
+  python function_model_core_acc.py  # Outputs: function_model_core_acc.json
+  ```
+
+### Integration Model – AUTOSAR Adaptive
+
+- Generate integration schema:
+  ```bash
+  python integration_model_adaptive_autosar.py  # Outputs: integration_schema_adaptive_autosar.json
+  ```
+- Generate integration model for core ACC:
+  ```bash
+  python integration_model_AA_core_acc.py  # Outputs: integration_model_AA_core_acc.json
+  ```
+
+### Integration Model – ROS 2
+
+- Generate integration schema for ROS 2:
+  ```bash
+  python integration_model_ros2.py  # Outputs: integration_schema_ros2.json
+  ```
+- Generate integration model for core ACC:
+  ```bash
+  python integration_model_ros2_core_acc.py  # Outputs: integration_model_ros2_core_acc.json
+  ```
+
+---
+
+## Contribution
+
+We welcome contributions to improve code quality, add features, and expand platform support. Please see [`CONTRIBUTING.md`](CONTRIBUTING.md) for guidelines.
+
+**TODO:** Further instructions for contributing will be added soon.
+
+---
+
+## References to other projects
+- The Vehicle Signal Specification (VSS) file created is in compliance with the [COVESA VSS repo](https://github.com/COVESA/vehicle_signal_specification).
+- The example Vehicle Signal Specification (.vspec) file is generated using the [VSS GUI tool](https://github.com/eclipse-autoapiframework/vss-gui-tool).
+
+---
+
+## Publication
+
+For full project details, refer to the upcoming publication.
+
+*TODO: Add the link to the publication when available.*
+
+---
+
+## Contact & Support
+
+For questions or support, please open an issue or contact the maintainers via GitHub.

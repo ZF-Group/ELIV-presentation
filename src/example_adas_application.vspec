@@ -1,0 +1,92 @@
+# Note: bar and radians should be included in units.yaml file if unavailable.
+
+Vehicle:
+  type: branch
+  description: Vehicle signals.
+
+Vehicle.Chassis:
+  type: branch
+  description: Chassis signals.
+
+Vehicle.Chassis.Brake:
+  type: branch
+  description: Brake signals.
+
+Vehicle.Chassis.Steering:
+  type: branch
+  description: Steering signals.
+
+Vehicle.ADAS:
+  type: branch
+  description: ADAS signals.
+
+Vehicle.ADAS.Map:
+  type: branch
+  description: Map signals.
+
+Vehicle.ADAS.Map.DFS:
+  type: branch
+  description: Dervied function signals from Map signals.
+
+Vehicle.ADAS.EcoControl:
+  type: branch
+  description: Eco Control signals.
+
+Vehicle.Acceleration:
+  type: branch
+  description: Acceleration signals.
+
+Vehicle.Chassis.Brake.CylP:
+  type: sensor
+  datatype: double
+  unit: bar # Included unit definition of bar in units.yaml file
+  min: -30.0
+  max: 276.9
+  resolution: 0.3
+  ASILlevel: QM
+  description: Pressure in the main brake cylinder.
+
+Vehicle.Chassis.Steering.WhlAg:
+  type: sensor
+  datatype: double
+  unit: radians # Included unit definition of radians in units.yaml file
+  min: -16.0
+  max: 16.766
+  resolution: 0.002
+  ASILlevel: QM
+  description: Filtered and compensated steering wheel angle in radian.
+
+Vehicle.ADAS.Map.DFS.MapDataSpdUnitTyp:
+  type: sensor
+  datatype: string
+  allowed: ['km/h', 'mi/h', 'unknown']
+  ASILlevel: QM
+  description: Current speed unit type (mph or kph).
+
+Vehicle.ADAS.EcoControl.Status:
+  type: sensor
+  datatype: uint8
+  resolution: 1.0
+  ASILlevel: QM
+  description: Current status of EcoControl.
+
+Vehicle.ADAS.EcoControl.IsEnabled:
+  type: sensor
+  datatype: boolean
+  min: 0
+  max: 1
+  ASILlevel: QM
+  description: Function is enabled or not.
+
+Vehicle.Acceleration.Longitudinal:
+  type: sensor
+  datatype: float
+  unit: m/s^2
+  description: Vehicle acceleration in X-direction. (longitudinal acceleration).
+
+Vehicle.Mass:
+  type: attribute
+  datatype: float
+  default: 2495
+  unit: kg
+  description: Mass of the vehicle.

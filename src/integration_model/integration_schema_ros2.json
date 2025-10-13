@@ -27,6 +27,29 @@
       "title": "ArgTypeItem",
       "type": "object"
     },
+    "Communication": {
+      "properties": {
+        "RunnableName": {
+          "description": "Name of the runnable to map the communication to",
+          "title": "Runnablename",
+          "type": "string"
+        },
+        "ROSTopicList": {
+          "description": "Relevant ROS Topics for the function",
+          "items": {
+            "$ref": "#/$defs/ROSTopic"
+          },
+          "title": "Rostopiclist",
+          "type": "array"
+        }
+      },
+      "required": [
+        "RunnableName",
+        "ROSTopicList"
+      ],
+      "title": "Communication",
+      "type": "object"
+    },
     "Component": {
       "properties": {
         "Name": {
@@ -48,6 +71,79 @@
         "functionList"
       ],
       "title": "Component",
+      "type": "object"
+    },
+    "ConversionAPI": {
+      "properties": {
+        "Name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "ReturnDataType": {
+          "title": "Returndatatype",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Name",
+        "ReturnDataType"
+      ],
+      "title": "ConversionAPI",
+      "type": "object"
+    },
+    "DataMap": {
+      "properties": {
+        "GlobalVariableName": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Globalvariablename",
+          "type": "array"
+        },
+        "GlobalVariableDataType": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Globalvariabledatatype",
+          "type": "array"
+        },
+        "ROSTopicFieldName": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Rostopicfieldname",
+          "type": "array"
+        },
+        "ROSTopicFieldDataType": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Rostopicfielddatatype",
+          "type": "array"
+        },
+        "ConversionAPI": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/ConversionAPI"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Conversionapi"
+        }
+      },
+      "required": [
+        "GlobalVariableName",
+        "GlobalVariableDataType",
+        "ROSTopicFieldName",
+        "ROSTopicFieldDataType",
+        "ConversionAPI"
+      ],
+      "title": "DataMap",
       "type": "object"
     },
     "DataQ": {
@@ -422,6 +518,35 @@
         "Units"
       ],
       "title": "Parameter",
+      "type": "object"
+    },
+    "ROSTopic": {
+      "properties": {
+        "TopicName": {
+          "description": "Name of the ROS2 topic",
+          "title": "Topicname",
+          "type": "string"
+        },
+        "InterfaceName": {
+          "description": "Name of the interface from the runnable",
+          "title": "Interfacename",
+          "type": "string"
+        },
+        "DataMappingList": {
+          "description": "Mapping of global variables to ROS2 topic fields",
+          "items": {
+            "$ref": "#/$defs/DataMap"
+          },
+          "title": "Datamappinglist",
+          "type": "array"
+        }
+      },
+      "required": [
+        "TopicName",
+        "InterfaceName",
+        "DataMappingList"
+      ],
+      "title": "ROSTopic",
       "type": "object"
     },
     "SafetyReaction": {
@@ -1037,6 +1162,13 @@
       },
       "title": "Datatypes",
       "type": "array"
+    },
+    "CommunicationList": {
+      "items": {
+        "$ref": "#/$defs/Communication"
+      },
+      "title": "Communicationlist",
+      "type": "array"
     }
   },
   "required": [
@@ -1044,8 +1176,9 @@
     "FunctionInfo",
     "ComponentList",
     "ModesList",
-    "Datatypes"
+    "Datatypes",
+    "CommunicationList"
   ],
-  "title": "FDKFunctionModel",
+  "title": "IntegrationModel",
   "type": "object"
 }

@@ -1,0 +1,230 @@
+{
+   "MetaInfo": {
+      "Authority": "ZF Friedrichshafen AG, DIRDS2",
+      "SchemaAuthor": "Viswanatha Reddy, Batchu",
+      "Date": "12.09.2025",
+      "SchemaVersion": "1.0.0",
+      "SchemaDescription": "Details of the standard function Interfaces - Working Revision"
+   },
+   "FunctionInfo": {
+      "FunctionName": "CoreAcc",
+      "FunctionResponsible": "ParthaSarathy Natarajan",
+      "Description": "Core Adaptive Cruise Control application"
+   },
+   "ComponentList": [
+      {
+         "Name": "CoreAcc",
+         "functionList": [
+            {
+               "Name": "CoreAcc_Init",
+               "Description": "Core ACC initialisation function",
+               "Runtype": "Init",
+               "Cycletime": null,
+               "StackSize": null,
+               "PrevRunnable": null,
+               "ExecOffset": null,
+               "ParallelProcessing": false,
+               "AsilLevel": null,
+               "Watchdog": null,
+               "Scheduling": "Non-Preemptive",
+               "DebounceDelay": null,
+               "Priority": "higher than CoreAcc_Step function",
+               "EventList": null,
+               "funcContractList": null
+            },
+            {
+               "Name": "CoreAcc_Step",
+               "Description": "Core ACC Step function/Main Runnable",
+               "Runtype": "Cyclic",
+               "Cycletime": 50,
+               "StackSize": null,
+               "PrevRunnable": "CoreAcc_Init",
+               "ExecOffset": null,
+               "ParallelProcessing": null,
+               "AsilLevel": null,
+               "Watchdog": null,
+               "Scheduling": "Non-Preemptive",
+               "DebounceDelay": null,
+               "Priority": "higher than Gacc  Component",
+               "EventList": null,
+               "funcContractList": [
+                  {
+                     "Type": "Global Variable Interfaces",
+                     "SignalList": [
+                        {
+                           "Name": "BrkCylP",
+                           "Description": "Chasis Brake Cylinder Pressure",
+                           "Role": "Consumer",
+                           "AsilLevel": "qm",
+                           "Timeout": null,
+                           "Access": null,
+                           "Datatype": "DT_SInt64",
+                           "Factor": null,
+                           "Offset": null,
+                           "Min": -30.0,
+                           "Max": 276.9,
+                           "Default": null,
+                           "InitValue": 0.0,
+                           "Units": null,
+                           "RangeErrorAction": null
+                        },
+                        {
+                           "Name": "SteerWhlAg",
+                           "Description": "Steering Wheel angle",
+                           "Role": "Consumer",
+                           "AsilLevel": "qm",
+                           "Timeout": null,
+                           "Access": null,
+                           "Datatype": "DT_SInt64",
+                           "Factor": null,
+                           "Offset": null,
+                           "Min": -16.0,
+                           "Max": 16.766,
+                           "Default": null,
+                           "InitValue": -16.0,
+                           "Units": "rad",
+                           "RangeErrorAction": null
+                        },
+                        {
+                           "Name": "EnaGACC",
+                           "Description": "Is ADAS EcoControl Enabled",
+                           "Role": "Consumer",
+                           "AsilLevel": "qm",
+                           "Timeout": null,
+                           "Access": null,
+                           "Datatype": "DT_Bool",
+                           "Factor": null,
+                           "Offset": null,
+                           "Min": 0.0,
+                           "Max": 1.0,
+                           "Default": 0.0,
+                           "InitValue": 0.0,
+                           "Units": null,
+                           "RangeErrorAction": null
+                        },
+                        {
+                           "Name": "VehM",
+                           "Description": "Vehicle Mass",
+                           "Role": "Consumer",
+                           "AsilLevel": "qm",
+                           "Timeout": null,
+                           "Access": null,
+                           "Datatype": "DT_SInt64",
+                           "Factor": null,
+                           "Offset": null,
+                           "Min": null,
+                           "Max": null,
+                           "Default": null,
+                           "InitValue": 2495.0,
+                           "Units": null,
+                           "RangeErrorAction": null
+                        },
+                        {
+                           "Name": "SpdLimUnit",
+                           "Description": "ADAS Map DFS Map Data Speed UnitType",
+                           "Role": "Consumer",
+                           "AsilLevel": "qm",
+                           "Timeout": null,
+                           "Access": null,
+                           "Datatype": "DT_UInt8",
+                           "Factor": null,
+                           "Offset": null,
+                           "Min": 0.0,
+                           "Max": 3.0,
+                           "Default": null,
+                           "InitValue": 0.0,
+                           "Units": "enum",
+                           "RangeErrorAction": null
+                        },
+                        {
+                           "Name": "HstVehALgtFild",
+                           "Description": "EgoVehicleLongitudinalAcceleration",
+                           "Role": "Consumer",
+                           "AsilLevel": "qm",
+                           "Timeout": null,
+                           "Access": null,
+                           "Datatype": "DT_SInt64",
+                           "Factor": null,
+                           "Offset": null,
+                           "Min": -20.0,
+                           "Max": 20.94,
+                           "Default": null,
+                           "InitValue": -20.0,
+                           "Units": "m/s^2",
+                           "RangeErrorAction": null
+                        },
+                        {
+                           "Name": "AsmAcc_AccIntSts",
+                           "Description": "eco control status",
+                           "Role": "Provider",
+                           "AsilLevel": "qm",
+                           "Timeout": null,
+                           "Access": null,
+                           "Datatype": "DT_UInt8",
+                           "Factor": null,
+                           "Offset": null,
+                           "Min": 0.0,
+                           "Max": 15.0,
+                           "Default": 0.0,
+                           "InitValue": null,
+                           "Units": null,
+                           "RangeErrorAction": null
+                        }
+                     ],
+                     "DataQList": null,
+                     "MethodList": null,
+                     "ParameterList": null,
+                     "ErrorList": null,
+                     "SafetyReactionList": null
+                  }
+               ]
+            },
+            {
+               "Name": "CoreAcc_Terminate",
+               "Description": "Core ACC terminate function during shutdown",
+               "Runtype": "Shutdown",
+               "Cycletime": null,
+               "StackSize": null,
+               "PrevRunnable": null,
+               "ExecOffset": null,
+               "ParallelProcessing": null,
+               "AsilLevel": null,
+               "Watchdog": null,
+               "Scheduling": "Non-Preemptive",
+               "DebounceDelay": null,
+               "Priority": "higher than CoreAcc_Step, and CoreACC_Init function",
+               "EventList": null,
+               "funcContractList": null
+            }
+         ]
+      }
+   ],
+   "ModesList": null,
+   "Datatypes": [
+      {
+         "typeRef": "DT_UInt16",
+         "category": "primitive",
+         "cDef": "unsigned short int"
+      },
+      {
+         "typeRef": "DT_UInt8",
+         "category": "primitive",
+         "cDef": "unsigned char"
+      },
+      {
+         "typeRef": "DT_SInt64",
+         "category": "primitive",
+         "cDef": "double"
+      },
+      {
+         "typeRef": "DT_UInt64",
+         "category": "primitive",
+         "cDef": "Unsigned double"
+      },
+      {
+         "typeRef": "DT_Bool",
+         "category": "primitive",
+         "cDef": "unsigned char"
+      }
+   ]
+}

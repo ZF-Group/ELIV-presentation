@@ -184,6 +184,6 @@ FunctionModel = im.FunctionModel(
     DataTypes=None,
 )
 
-f = open("integration_model_core_acc.json", "w+")
+f = open("integration_model_AA_core_acc.json", "w+")
 f.write(json.dumps(FunctionModel.model_dump(), indent=3))
 f.close()
