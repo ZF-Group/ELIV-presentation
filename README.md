@@ -120,11 +120,17 @@ pip install pydantic>=2.0 typing-extensions>=4.0
 
 ---
 
-## Contributing
+## Contribution
 
 We welcome contributions to improve code quality, add features, and expand platform support. Please see [`CONTRIBUTING.md`](CONTRIBUTING.md) for guidelines.
 
 **TODO:** Further instructions for contributing will be added soon.
+
+---
+
+## References to other projects
+- The Vehicle Signal Specification (VSS) file created is in compliance with the [COVESA VSS repo](https://github.com/COVESA/vehicle_signal_specification).
+- The example Vehicle Signal Specification (.vspec) file is generated using the [VSS GUI tool](https://github.com/eclipse-autoapiframework/vss-gui-tool).
 
 ---
 
